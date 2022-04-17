@@ -2,8 +2,12 @@
 
 .card {
     border-radius: 5px;
-    background-color: #E0E0E0;
+    background-color: #F5F5F5;
+    box-shadow: 0 1px 4px #BBBBBB;
+}
 
+.card:hover {
+    box-shadow: 0 2px 6px #BBBBBB;
 }
 
 p {
@@ -13,7 +17,9 @@ p {
     color: #292929;
 }
 
-
+.non-text {
+    cursor: default;
+}
 
 
 
