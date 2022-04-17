@@ -1,4 +1,5 @@
 import './App.css';
+import Tooltip from "./owen/Tooltip";
 
 function App() {
 
@@ -7,7 +8,7 @@ function App() {
 
   return (
     <div>
-
+      <Tooltip/>
     </div>
   );
 }
