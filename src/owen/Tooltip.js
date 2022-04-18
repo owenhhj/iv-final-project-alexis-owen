@@ -43,10 +43,12 @@ function TooltipUniEntry({
                           }) {
   console.log(uni.link, uni.logo)
 
+  // xg7: try PyQt to fake a browser and visit the url
+
   return (
     <div className={'TooltipUniEntry'}>
       <div className={'logo-and-name'}>
-        {/*<img src={uni.logo} alt=""/>*/}
+        <img src={uni.logo} alt=""/>
         <p>{uni.university}</p>
       </div>
       <div>
