@@ -1,6 +1,7 @@
 import './Tooltip.css';
 import {csv} from 'd3';
 import {useEffect, useState} from "react";
+import {legalize_name} from "../CommonFunctions";
 
 function useData(csvPath, row=3) {
   const [dataAll, setData] = useState(null);
@@ -21,11 +22,8 @@ export default function Tooltip({
 
   return (
     <div className={'Tooltip card non-text'}>
-      <div className={'tooltip-row'}>
-        <p>{title}</p>
-      </div>
-      <div className={'tooltip-row'}>
-        <p>{city}</p>
+      <div className={'tooltip-row-title'}>
+        <p>Top Universities in {city}</p>
       </div>
 
       {data && data.map((uni, index) => {
@@ -41,18 +39,22 @@ export default function Tooltip({
 function TooltipUniEntry({
   uni={}
                           }) {
-  console.log(uni.link, uni.logo)
+  const [imgURL, setImgURL] = useState('./logo192.png');
 
-  // xg7: try PyQt to fake a browser and visit the url
+  useEffect(() => {
+    let name = legalize_name(uni.university);
+    let temp = `./uni-logos/${name}.jpg`;
+    setImgURL(temp);
+  }, []);
 
   return (
-    <div className={'TooltipUniEntry'}>
-      <div className={'logo-and-name'}>
-        <img src={uni.logo} alt=""/>
+    <div className={'TooltipUniEntry card'}>
+      <div className={'half-logo-name'}>
+        <img src={imgURL} alt=""/>
         <p>{uni.university}</p>
       </div>
-      <div>
-
+      <div className={'half-rank'}>
+        <p>{uni.rank_display}</p>
       </div>
     </div>
   );
