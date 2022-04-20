@@ -1,4 +1,21 @@
 
+p {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, sans-serif;
+    color: #404040;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+hr {
+    width: 90%;
+    height: 1px;
+    background-color: #DADADA;
+    border: none;
+}
+
 .card {
     border-radius: 5px;
     background-color: #F5F5F5;
@@ -7,14 +24,6 @@
 
 .card:hover {
     box-shadow: 0 2px 5px #BBBBBB;
-}
-
-p {
-    margin: 0;
-    padding: 0;
-    /*font-family: Georgia, serif;*/
-    font-family: Roboto, sans-serif;
-    color: #292929;
 }
 
 .non-text {

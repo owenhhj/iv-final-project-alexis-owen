@@ -3,7 +3,7 @@ import {csv} from 'd3';
 import {useEffect, useState} from "react";
 import {legalize_name} from "../CommonFunctions";
 
-function useData(csvPath, row=3) {
+function useData(csvPath='./data.csv', row=3) {
   const [dataAll, setData] = useState(null);
   useEffect(() => {
     csv(csvPath).then(data => {
@@ -18,13 +18,15 @@ export default function Tooltip({
   city='Shanghai',
   schoolsData=[]
                                 }) {
-  let data = useData('./data.csv')
+  let data = useData();
 
   return (
     <div className={'Tooltip card non-text'}>
       <div className={'tooltip-row-title'}>
         <p>Top Universities in {city}</p>
       </div>
+
+      <hr/>
 
       {data && data.map((uni, index) => {
         return (
