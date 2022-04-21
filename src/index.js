@@ -4,6 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 import { WorldMap } from "./worldmap";
+import { BarChart } from "./barchart";
 import { json, csv, scaleOrdinal, schemeOranges } from "d3";
 import * as topojson from "topojson-client";
 
@@ -41,23 +42,35 @@ function useLocation(csvPath) {
 
 function Geomap() {
 
-  const WIDTH = 1000;
-  const HEIGHT = 600;
-  const margin = {left: 50, right: 50, top: 50, bottom: 50};
+  const WIDTH = 1500;
+  const HEIGHT = 1000;
+  const margin = {left: 50, right: 50, top: 50, bottom: 50, gap:50};
 
   const [selectedCity, setSelectedCity] = React.useState(null);
+  const [rankLimit, setRankLimit] = React.useState('0');
   const rawData = useLocation(csvUrl);
   const map = useMap(mapUrl);
   //==============data processing=====================
   if (!map || !rawData) {
     return <pre>Loading...</pre>;
   };
-  //console.log(rawData, map);
+  // console.log(rawData, map);
 
-  const yearData = rawData.filter( d => {
+  const rawYearData = rawData.filter( d => {
     return d.year == 2022;
   });
   //console.log(yearData, map);
+
+  // =============slider=============
+  const changeHandler = (event) => {
+    setRankLimit(event.target.value);
+  }
+  const RANKLIMIT = [200,150,100,50]
+  const yearData = rawYearData.filter( d => {
+    return d.ranking <= RANKLIMIT[rankLimit];
+  });
+
+
 
   const cityData = [];
   for (let i = 0; i < yearData.length; i++){
@@ -107,16 +120,28 @@ function Geomap() {
 
 
 
-  const width = WIDTH - margin.left - margin.right;
-  const height = HEIGHT - margin.top - margin.bottom;
 
-  return <svg width={WIDTH} height={HEIGHT}>
+  const mapWidth = 900
+  const mapHeight = 400
+
+  return <div>
+    <div>
+      <input key="slider" type='range' min='0' max='3' value={rankLimit} step='1' onChange={changeHandler}/>
+      <input key="monthText" type="text" value={RANKLIMIT[rankLimit]} readOnly/>
+    </div>
+    <svg width={WIDTH} height={HEIGHT}>
     <g>
-      <WorldMap map={map} projection={"geoEqualEarth"} width={width} height={height}
-                data={rawData} location={uniqueGroupByCity} selectedCity={selectedCity}
+      <WorldMap map={map} projection={"geoEqualEarth"}
+                data={yearData} location={uniqueGroupByCity} selectedCity={selectedCity}
+                setSelectedCity={setSelectedCity}/>
+      <BarChart offsetX={margin.left} offsetY={margin.top+mapHeight+margin.gap}
+                height={150} width={mapWidth}
+                data={yearData} location={uniqueGroupByCity}
+                selectedCity={selectedCity}
                 setSelectedCity={setSelectedCity}/>
     </g>
   </svg>
+  </div>
 }
 
 ReactDOM.render(

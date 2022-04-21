@@ -5,7 +5,7 @@ import { scaleLinear, min, max} from "d3";
 // import { feature } from "topojson-client";
 
 export function WorldMap(props){
-  const {map, projection, width, height, data,location,selectedCity, setSelectedCity} = props;
+  const {map, projection, data,location,selectedCity, setSelectedCity} = props;
 
   const trans = geoEqualEarth();
   let path = geoPath(geoEqualEarth()); // the default projection
@@ -14,7 +14,7 @@ export function WorldMap(props){
     path = geoPath(trans);
   }
   if (projection==="geoMercator"){
-    path = geoPath(geoMercator().fitSize([width, height], map));
+    path = geoPath(geoMercator());
   }
 
   const mouseOver = (d) => {
@@ -44,3 +44,7 @@ export function WorldMap(props){
     })}
   </g>
 }
+
+
+
+
