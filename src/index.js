@@ -118,9 +118,6 @@ function Geomap() {
   //console.log("This should be unique",uniqueGroupByCity);
   //==============data processing finished=====================
 
-
-
-
   const mapWidth = 900
   const mapHeight = 400
 

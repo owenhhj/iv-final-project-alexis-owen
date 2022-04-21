@@ -28,7 +28,6 @@ export function WorldMap(props){
   const radius = scaleLinear().range([3, 12])
     .domain([min(location, d => d.count), max(location, d => d.count)]);
   const getColor = (selectedCity, d) => {
-    //console.log("Should be equal",selectedCity,d)
     return selectedCity && d.city === selectedCity.city && d.country === selectedCity.country ? "red" : "steelblue";}
 
   return <g>

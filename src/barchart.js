@@ -26,7 +26,7 @@ export function BarChart(props) {
     <text style={{ textAnchor:'start', fontSize:'15px'}} transform={`translate(${width-100}, 0)`}>
       {"Score in 2022"}
     </text>
-    {/* draw the x axis */}
+    {/* draw x axis */}
     <g>
       {<line x1={0} y1={height} x2={width} y2={height} stroke='black'/>}
       {xScale.domain().map(tickValue =>
@@ -36,7 +36,7 @@ export function BarChart(props) {
       )}
     </g>
 
-    {/* draw the y axis */}
+    {/* draw y axis */}
     <g>
       {<line y2={height} stroke='black'/>}
       {yScale.ticks(5).map(tickValue =>
