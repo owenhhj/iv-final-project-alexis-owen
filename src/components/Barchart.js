@@ -9,7 +9,7 @@ export function Barchart(props) {
 
   const mouseOver = (d) => {
     setSelectedCity(d);
-    console.log(d);
+    // console.log(d);
   }
   const mouseOut = () => {
     setSelectedCity(null);
@@ -23,41 +23,43 @@ export function Barchart(props) {
   data.sort((a, b) => (b.score - a.score));
   xScale.domain(data.map(d => d.university));
 
-  return <g transform={`translate(${offsetX}, ${offsetY})`}>
-    <text style={{textAnchor: 'start', fontSize: '15px'}} transform={`translate(${width - 100}, 0)`}>
-      {"Score in 2022"}
-    </text>
-    {/* draw x axis */}
-    <g>
-      {<line x1={0} y1={height} x2={width} y2={height} stroke='black'/>}
-      {xScale.domain().map(tickValue =>
-        <g key={tickValue + 'B'} transform={`translate(${xScale(tickValue)}, 0)`}>
-          <line y2={height}/>
-        </g>
-      )}
-    </g>
+  return (
+    <g transform={`translate(${offsetX}, ${offsetY})`}>
+      <text style={{textAnchor: 'start', fontSize: '15px'}} transform={`translate(${width - 100}, 0)`}>
+        {"Score in 2022"}
+      </text>
+      {/* draw x axis */}
+      <g>
+        {<line x1={0} y1={height} x2={width} y2={height} stroke='black'/>}
+        {xScale.domain().map(tickValue =>
+          <g key={tickValue + 'B'} transform={`translate(${xScale(tickValue)}, 0)`}>
+            <line y2={height}/>
+          </g>
+        )}
+      </g>
 
-    {/* draw y axis */}
-    <g>
-      {<line y2={height} stroke='black'/>}
-      {yScale.ticks(5).map(tickValue =>
-        <g key={tickValue} transform={`translate(-10, ${yScale(tickValue)})`}>
-          <line x2={10} stroke='black'/>
-          <text style={{textAnchor: 'end', fontSize: '10px'}}>
-            {tickValue}
-          </text>
-        </g>
-      )}
-    </g>
+      {/* draw y axis */}
+      <g>
+        {<line y2={height} stroke='black'/>}
+        {yScale.ticks(5).map(tickValue =>
+          <g key={tickValue} transform={`translate(-10, ${yScale(tickValue)})`}>
+            <line x2={10} stroke='black'/>
+            <text style={{textAnchor: 'end', fontSize: '10px'}}>
+              {tickValue}
+            </text>
+          </g>
+        )}
+      </g>
 
-    {/* draw the bars */}
-    <g>
-      {data.map(d => {
-        return <rect key={d.university + "BS"} x={xScale(d.university)}
-                     y={yScale(d.score)} width={xScale.bandwidth()} height={height - yScale(d.score)}
-                     fill={getColor(selectedCity, d)} stroke={"black"}
-                     onMouseEnter={() => mouseOver(d)} onMouseOut={mouseOut}/>
-      })}
+      {/* draw the bars */}
+      <g>
+        {data.map(d => {
+          return <rect key={d.university + "BS"} x={xScale(d.university)}
+                       y={yScale(d.score)} width={xScale.bandwidth()} height={height - yScale(d.score)}
+                       fill={getColor(selectedCity, d)} stroke={"black"}
+                       onMouseEnter={() => mouseOver(d)} onMouseOut={mouseOut}/>
+        })}
+      </g>
     </g>
-  </g>
+  );
 }

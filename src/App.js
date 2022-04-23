@@ -5,11 +5,12 @@ import {useState} from "react";
 
 function App() {
   const [selectedCity, setSelectedCity] = useState(null);
+
   return (
-    <>
-      <Geomap selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
-      <Tooltip/>
-    </>
+    <div className={'App'}>
+      <Geomap selectedCity={selectedCity} setSelectedCity={setSelectedCity}/>
+      <Tooltip selectedCity={selectedCity}/>
+    </div>
   );
 }
 

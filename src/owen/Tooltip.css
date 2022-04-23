@@ -1,4 +1,66 @@
 
+.Tooltip {
+    /*width: 500px;*/
+    /*height: 600px;*/
+    width: 30vw;
+    height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.tooltip-row-title {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tooltip-row-title p {
+    width: 90%;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/**/
+
+.TooltipUniEntry {
+    width: 85%;
+    margin-top: 0.6em;
+    background-color: #E0E0E0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.half-logo-name {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.half-logo-name img {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 5px 0 0 5px;
+}
+
+.half-logo-name p {
+    margin-left: 0.6em;
+}
+
+/**/
+
+.half-rank p {
+    margin-right: 1em;
+}
 
 
 
