@@ -37,13 +37,16 @@ function useLocation(csvPath) {
   return dataAll;
 }
 
-export default function Geomap() {
+export default function Geomap({
+                                 selectedCity,
+                                 setSelectedCity
+                               }) {
 
   const WIDTH = 1500;
   const HEIGHT = 1000;
   const margin = {left: 50, right: 50, top: 50, bottom: 50, gap: 50};
 
-  const [selectedCity, setSelectedCity] = React.useState(null);
+  // const [selectedCity, setSelectedCity] = React.useState(null);
   const [rankLimit, setRankLimit] = React.useState('0');
   const rawData = useLocation(csvUrl);
   const map = useMap(mapUrl);
