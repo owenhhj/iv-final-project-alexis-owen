@@ -1,14 +1,13 @@
 import './App.css';
+import Geomap from "./components/Geomap";
 
 function App() {
 
 
-
-
   return (
-    <div>
-
-    </div>
+    <>
+      <Geomap/>
+    </>
   );
 }
 
