@@ -1,6 +1,6 @@
 import './App.css';
 import Geomap from "./components/Geomap";
-import Tooltip from "./owen/Tooltip";
+import Tooltip from "./components/Tooltip";
 import {useState} from "react";
 
 function App() {
