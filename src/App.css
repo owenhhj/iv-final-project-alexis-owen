@@ -4,6 +4,12 @@
     background-color: #E0E0E0;
 }
 
+.App {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 p {
     margin: 0;
     padding: 0;
@@ -35,28 +41,7 @@ hr {
     cursor: default;
 }
 
-.land {
-    fill: rgb(141, 155, 136);
-}
 
-.interiors {
-    fill: none;
-    stroke: #C0C0BB;
-    stroke-width: 1px;
-}
-
-.boundary {
-    fill: #9a9e9e;
-    stroke: #C0C0BB;
-}
-
-.sphere {
-    fill: rgb(150, 209, 243);
-}
-
-/*circle {*/
-/*  fill: rgb(218, 11, 11);*/
-/*}*/
 
 
 

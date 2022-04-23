@@ -1,7 +1,9 @@
 
 .Tooltip {
-    width: 500px;
-    height: 600px;
+    /*width: 500px;*/
+    /*height: 600px;*/
+    width: 30vw;
+    height: 80vh;
 
     display: flex;
     flex-direction: column;

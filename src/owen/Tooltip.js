@@ -3,44 +3,55 @@ import {csv} from 'd3';
 import {useEffect, useState} from "react";
 import {legalize_name} from "../CommonFunctions";
 
-function useData(csvPath='./data.csv', row=3) {
-  const [dataAll, setData] = useState(null);
+export function useData(csvPath = './qs ranking 200 with location.csv', row = 3, year = 2022) {
+  const [dataAll, setDataAll] = useState([]);
   useEffect(() => {
+    let temp = [];
     csv(csvPath).then(data => {
-      setData(data.slice(0, row));
+      data.forEach(row => {
+        if (row.year === year.toString()) {
+          temp.push(row);
+        }
+      });
     });
+    setDataAll(temp);
   }, []);
   return dataAll;
 }
 
 export default function Tooltip({
-  title='Default Tooltip Title',
-  city='Shanghai',
-  schoolsData=[]
+                                  title = 'Default Tooltip Title',
+                                  selectedCity  // can be an object or null
                                 }) {
   let data = useData();
 
   return (
     <div className={'Tooltip card non-text'}>
-      <div className={'tooltip-row-title'}>
-        <p>Top Universities in {city}</p>
-      </div>
+      {selectedCity && (
+        <>
+          <div className={'tooltip-row-title'}>
+            <p>Top Universities in {selectedCity.city}</p>
+          </div>
 
-      <hr/>
+          <hr/>
 
-      {data && data.map((uni, index) => {
-        return (
-          <TooltipUniEntry key={index} uni={uni}/>
-        );
-      })}
+          {data
+            .filter(row => row.city === selectedCity.city && row.country === selectedCity.country)
+            .map((uni, index) => {
+              return (
+                <TooltipUniEntry key={index} uni={uni}/>
+              );
+            })}
 
+        </>
+      )}
     </div>
   );
 };
 
 function TooltipUniEntry({
-  uni={}
-                          }) {
+                           uni = {}
+                         }) {
   const [imgURL, setImgURL] = useState('./logo192.png');
 
   useEffect(() => {

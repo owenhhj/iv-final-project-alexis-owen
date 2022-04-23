@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState} from "react";
+import './Geomap.css';
 import {Worldmap} from "./Worldmap";
 import {Barchart} from "./Barchart";
 import {csv, json} from "d3";
@@ -37,14 +38,16 @@ function useLocation(csvPath) {
   return dataAll;
 }
 
-export default function Geomap() {
+export default function Geomap({
+  selectedCity,
+  setSelectedCity
+                               }) {
 
-  const WIDTH = 1500;
-  const HEIGHT = 1000;
+  const WIDTH = 1000;
+  const HEIGHT = 800;
   const margin = {left: 50, right: 50, top: 50, bottom: 50, gap: 50};
 
-  const [selectedCity, setSelectedCity] = React.useState(null);
-  const [rankLimit, setRankLimit] = React.useState('0');
+  const [rankLimit, setRankLimit] = useState('0');
   const rawData = useLocation(csvUrl);
   const map = useMap(mapUrl);
   //==============data processing=====================
@@ -118,24 +121,26 @@ export default function Geomap() {
   const mapWidth = 900
   const mapHeight = 400
 
-  return <div>
-    <div>
-      <input key="slider" type='range' min='0' max='3' value={rankLimit} step='1' onChange={changeHandler}/>
-      <input key="monthText" type="text" value={RANKLIMIT[rankLimit]} readOnly/>
+  return (
+    <div className={'Geomap'}>
+      <div>
+        <input key="slider" type='range' min='0' max='3' value={rankLimit} step='1' onChange={changeHandler}/>
+        <input key="monthText" type="text" value={RANKLIMIT[rankLimit]} readOnly/>
+      </div>
+      <svg width={WIDTH} height={HEIGHT}>
+        <g>
+          <Worldmap map={map} projection={"geoEqualEarth"}
+                    data={yearData} location={uniqueGroupByCity} selectedCity={selectedCity}
+                    setSelectedCity={setSelectedCity}/>
+          <Barchart offsetX={margin.left} offsetY={margin.top + mapHeight + margin.gap}
+                    height={150} width={mapWidth}
+                    data={yearData} location={uniqueGroupByCity}
+                    selectedCity={selectedCity}
+                    setSelectedCity={setSelectedCity}/>
+        </g>
+      </svg>
     </div>
-    <svg width={WIDTH} height={HEIGHT}>
-      <g>
-        <Worldmap map={map} projection={"geoEqualEarth"}
-                  data={yearData} location={uniqueGroupByCity} selectedCity={selectedCity}
-                  setSelectedCity={setSelectedCity}/>
-        <Barchart offsetX={margin.left} offsetY={margin.top + mapHeight + margin.gap}
-                  height={150} width={mapWidth}
-                  data={yearData} location={uniqueGroupByCity}
-                  selectedCity={selectedCity}
-                  setSelectedCity={setSelectedCity}/>
-      </g>
-    </svg>
-  </div>
+  );
 }
 
 
