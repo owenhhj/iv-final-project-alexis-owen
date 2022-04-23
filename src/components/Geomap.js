@@ -4,7 +4,6 @@ import {Barchart} from "./Barchart";
 import {csv, json} from "d3";
 import * as topojson from "topojson-client";
 
-
 const mapUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 const csvUrl = "./qs ranking 200 with location.csv";
 
