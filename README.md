@@ -3,6 +3,12 @@
 When quickly hovering through different cities, logos may lag --> shows logos of previous cities.\
 Caltech, Pasadena is not supposed to be in Houston.
 
+是否需要加滚轮缩放 或者 单独画某个洲
+
+把linechart加在tooltip里？
+
+barchart的纵轴的意义？换成(#top-rank)
+
 `https://simplemaps.com/data/world-cities`
 
 ## ////////////////////////////////////////////////////////////////////////////////////////////////////
