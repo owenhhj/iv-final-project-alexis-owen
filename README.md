@@ -1,13 +1,20 @@
 # Information Visualization Final Project - Alexis & Owen
 
-When quickly hovering through different cities, logos may lag --> shows logos of previous cities.\
-Caltech, Pasadena is not supposed to be in Houston.
+## todo
 
-是否需要加滚轮缩放 或者 单独画某个洲
+不做滚动页面-->页面分为四大块
 
-把linechart加在tooltip里？
+### Alexis
 
-barchart的纵轴的意义？换成(#top-rank)
+硬改Caltech坐标\
+LineChart
+optional: 按大洲画图
+
+### Owen
+
+(Multiple) Input for LineChart\
+动态布局页面\
+optional: Input for 按大洲画图
 
 `https://simplemaps.com/data/world-cities`
 
