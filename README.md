@@ -1,10 +1,11 @@
 # Information Visualization Final Project - Alexis & Owen
 
+When quickly hovering through different cities, logos may lag --> shows logos of previous cities.\
+Caltech, Pasadena is not supposed to be in Houston.
+
 `https://simplemaps.com/data/world-cities`
 
-
-
-# ////////////////////////////////////////////////////////////////////////////////////////////////////
+## ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 # Getting Started with Create React App
 
