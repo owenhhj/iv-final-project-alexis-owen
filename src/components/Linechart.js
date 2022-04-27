@@ -10,7 +10,7 @@ export function Linechart(props){
   const xScale = scaleBand().range([0, width])
     .domain(data.map(d => d.year));
   const yScale = scaleLinear().range([height, 0])
-    .domain([min(data, d => d.ranking), max(data, d => d.ranking)]).nice();
+    .domain([max(data, d => d.ranking),min(data, d => d.ranking)]).nice();
   const line = d3Line.line()
     .x(d => xScale(d.year))
     .y(d => yScale(d.ranking))
