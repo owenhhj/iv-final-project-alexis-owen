@@ -20,7 +20,6 @@ export function useData(csvPath = './qs ranking 200 with location.csv', row = 3,
 }
 
 export default function Tooltip({
-                                  title = 'Default Tooltip Title',
                                   selectedCity  // can be an object or null
                                 }) {
   let data = useData();
@@ -37,6 +36,7 @@ export default function Tooltip({
 
           {data
             .filter(row => row.city === selectedCity.city && row.country === selectedCity.country)
+            .sort((row1, row2) => (row2.score - row1.score))
             .map((uni, index) => {
               return (
                 <TooltipUniEntry key={index} uni={uni}/>

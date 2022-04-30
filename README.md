@@ -12,9 +12,8 @@ optional: 按大洲画图
 
 ### Owen
 
-tooltip排序\
-(Multiple) Input for LineChart\
-动态布局页面\
+连接多个图
+
 optional: Input for 按大洲画图
 
 `https://simplemaps.com/data/world-cities`
