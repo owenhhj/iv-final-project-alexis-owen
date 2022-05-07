@@ -14,7 +14,6 @@ const fakeUniOptions = [
 ];
 
 export default function LineChartSection() {
-  // const [uniNameOptions, setUniNameOptions] = useState([]);
   const [uniNamesSelected, setUniNamesSelected] = useState([]);
   const uniNameOptions = useLocation()
     .map(row => row.university)
