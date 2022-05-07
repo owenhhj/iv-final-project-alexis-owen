@@ -25,6 +25,7 @@ export default function LineChartSection() {
 
   return (
     <div className={'LineChartSection card'}>
+
       <div className={'LineChartSection-row-selector'}>
         <Autocomplete
           multiple
