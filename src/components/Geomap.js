@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import './Geomap.css';
 import {Worldmap} from "./Worldmap";
 import {Barchart} from "./Barchart";
+import {Linechart} from "./Linechart";
 import {csv, json} from "d3";
 import * as topojson from "topojson-client";
 
@@ -63,6 +64,13 @@ export default function Geomap({
     return d.year === 2022;
   });
   //console.log(yearData, map);
+
+  // =============input box============
+  // 请帮我写个input box！
+  const selectedUniversity = "New York University (NYU)"
+  const universityData = rawData.filter(d => {
+    return d.university === selectedUniversity;
+  });
 
   // =============slider=============
   const changeHandler = (event) => {
