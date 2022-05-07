@@ -1,26 +1,7 @@
 import React from "react";
 import {scaleLinear, scaleBand, max, min, curveBasis, csv} from "d3";
 import * as d3Line from 'd3'
-
-function useLocation(csvPath) {
-  const [dataAll, setData] = React.useState([]);
-  React.useEffect(() => {
-    csv(csvPath).then(data => {
-      data.forEach(d => {
-        d.lat = +d.lat;
-        d.lng = +d.lng;
-        d.ranking = +d.ranking;
-        d.year = +d.year;
-        d.score = +d.score;
-        d.student_faculty_ratio = +d.student_faculty_ratio;
-        d.international_students = +d.international_students;
-        d.faculty_count = +d.faculty_count;
-      });
-      setData(data);
-    });
-  }, []);
-  return dataAll;
-}
+import {useLocation} from "../CommonFunctions";
 
 export function Linechart({
                             selectedUniversities = ['NYU', 'NYU Shanghai'],
@@ -53,7 +34,7 @@ export function Linechart({
   const yTicks = yScale.ticks(5);
 
   return (
-    <svg width={width + 100} height={height + 100} style={{backgroundColor: 'lightyellow'}}>
+    <svg width={'100%'} height={'100%'} style={{backgroundColor: 'lightyellow'}}>
       <g transform={`translate(${offsetX},${offsetY})`}>
         <line y2={height} stroke={`black`}/>
         {yTicks.map(tickValue => {

@@ -4,16 +4,24 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import {Linechart} from "./Linechart";
+import {useState} from "react";
+import {useLocation} from "../CommonFunctions";
 
-const fakeUniNames = [{title: 'NYU'}, {title: 'NYUSH'}, {title: 'NYUAD'}];
+const fakeUniOptions = [
+  'New York University',
+  'Massachusetts Institute of Technology (MIT) ',
+  'University of Illinois at Urbana-Champaign'
+];
 
-export default function LineChartSection({
-  uniNames=fakeUniNames,
-                                         }) {
-
+export default function LineChartSection() {
+  // const [uniNameOptions, setUniNameOptions] = useState([]);
+  const [uniNamesSelected, setUniNamesSelected] = useState([]);
+  const uniNameOptions = useLocation()
+    .map(row => row.university)
+    .filter((uni, idx, self) => {return self.indexOf(uni)===idx});
 
   const handleUniSelect = (e, v) => {
-    console.log(v);
+    setUniNamesSelected(v);
   };
 
   return (
@@ -22,24 +30,23 @@ export default function LineChartSection({
         <Autocomplete
           multiple
           id="tags-standard"
-          options={uniNames}
-          getOptionLabel={(option) => option.title}
-          limitTags={3}
-          // defaultValue={}
-          // isOptionEqualToValue={option => option.title}
+          size={"small"}
+          options={uniNamesSelected.length < 3 ? uniNameOptions : []}
           onChange={handleUniSelect}
           renderInput={(params) => (
             <TextField
               {...params}
               variant="standard"
-              label="Select one or more universities"
+              label="Select up to 3 universities"
               placeholder=""
             />
           )}
         />
       </div>
 
-      <Linechart/>
+      <div className={'LineChartSection-row-graph'}>
+        <Linechart selectedUniversities={uniNamesSelected}/>
+      </div>
 
     </div>
   );
