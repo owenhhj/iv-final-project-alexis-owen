@@ -56,7 +56,7 @@ export function Barchart(props) {
         {data.map(d => {
           return <rect key={d.university + "BS"} x={xScale(d.university)}
                        y={yScale(d.score)} width={xScale.bandwidth()} height={height - yScale(d.score)}
-                       fill={getColor(selectedCity, d)} stroke={"black"}
+                       fill={getColor(selectedCity, d)} stroke={"black"} opacity={0.9}
                        onMouseEnter={() => mouseOver(d)} onMouseOut={mouseOut}/>
         })}
       </g>

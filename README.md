@@ -1,10 +1,24 @@
 # Information Visualization Final Project - Alexis & Owen
 
+## todo
+
+不做滚动页面-->页面分为四大块
+
+### Alexis
+
+硬改Caltech坐标\
+LineChart
+optional: 按大洲画图
+
+### Owen
+
+连接多个图
+
+optional: Input for 按大洲画图
+
 `https://simplemaps.com/data/world-cities`
 
-
-
-# ////////////////////////////////////////////////////////////////////////////////////////////////////
+## ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 # Getting Started with Create React App
 
