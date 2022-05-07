@@ -6,16 +6,24 @@ import {useState} from "react";
 
 function App() {
   const [selectedCity, setSelectedCity] = useState(null);
+  const [rankLimit, setRankLimit] = useState(2);
+  const RANKLIMIT = [50, 100, 150, 200];
 
   return (
     <div className={'App non-text'}>
       <div className={'grid-container'}>
         <div className={'grid-col1'}>
-          <Geomap selectedCity={selectedCity} setSelectedCity={setSelectedCity}/>
+          <Geomap
+            selectedCity={selectedCity} setSelectedCity={setSelectedCity}
+            rankLimit={rankLimit} setRankLimit={setRankLimit} RANKLIMIT={RANKLIMIT}
+          />
         </div>
 
         <div className={'grid-col2'}>
-          <Tooltip selectedCity={selectedCity}/>
+          <Tooltip
+            selectedCity={selectedCity}
+            rankLimit={rankLimit} RANKLIMIT={RANKLIMIT}
+          />
           <LineChartSection/>
         </div>
       </div>

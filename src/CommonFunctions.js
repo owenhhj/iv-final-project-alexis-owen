@@ -1,5 +1,6 @@
-import {useEffect, useState} from "react";
-import {csv} from "d3";
+import React, {useEffect, useState} from "react";
+import {csv, json} from "d3";
+import * as topojson from "topojson-client";
 
 export const COLORS = [
   '#7871AA',
@@ -17,6 +18,16 @@ export function legalize_name(name) {
     }
   }
   return ans;
+}
+
+export function useMap(jsonPath) {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    json(jsonPath).then(topoJsonData => {
+      setData(topojson.feature(topoJsonData, topoJsonData.objects.countries))
+    });
+  }, []);
+  return data;
 }
 
 export function useLocation(csvPath = './qs ranking 200 with location.csv') {
