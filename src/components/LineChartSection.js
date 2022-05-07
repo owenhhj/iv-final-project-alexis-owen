@@ -4,42 +4,72 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import {Linechart} from "./Linechart";
+import {useState} from "react";
+import {COLORS, useLocation} from "../CommonFunctions";
 
-const fakeUniNames = [{title: 'NYU'}, {title: 'NYUSH'}, {title: 'NYUAD'}];
-
-export default function LineChartSection({
-  uniNames=fakeUniNames,
-                                         }) {
-
+export default function LineChartSection() {
+  const [uniNamesSelected, setUniNamesSelected] = useState([]);
+  const [hoveredIndex, setHoveredIndex] = useState('-1');
+  const uniNameOptions = useLocation()
+    .map(row => row.university)
+    .filter((uni, idx, self) => {return self.indexOf(uni)===idx});
 
   const handleUniSelect = (e, v) => {
-    console.log(v);
+    setUniNamesSelected(v);
+  };
+
+  const handleMouseEnter = (e) => {
+    setHoveredIndex(e.target.getAttribute('itemID'));
+  };
+
+  const handleMouseLeave = (e) => {
+    setHoveredIndex('-1');
   };
 
   return (
     <div className={'LineChartSection card'}>
+      <div className={'tooltip-row-title'}>
+        <p>Rankings Over the Past Six Years</p>
+      </div>
+      <hr/>
       <div className={'LineChartSection-row-selector'}>
         <Autocomplete
           multiple
           id="tags-standard"
-          options={uniNames}
-          getOptionLabel={(option) => option.title}
-          limitTags={3}
-          // defaultValue={}
-          // isOptionEqualToValue={option => option.title}
+          size={"small"}
+          options={uniNamesSelected.length < 3 ? uniNameOptions : []}
           onChange={handleUniSelect}
           renderInput={(params) => (
             <TextField
               {...params}
               variant="standard"
-              label="Select one or more universities"
+              label="Select up to 3 universities"
               placeholder=""
             />
           )}
         />
       </div>
 
-      <Linechart/>
+      <div className={'LineChartSection-row-graph'}>
+        <Linechart selectedUniversities={uniNamesSelected} hoveredIndex={hoveredIndex} setHoveredIndex={setHoveredIndex}/>
+      </div>
+
+      {uniNamesSelected.map((uni, index) => {
+        return (
+          <div
+            className={'TooltipUniEntry card'} key={index}
+            style={index.toString() === hoveredIndex ? {boxShadow: '0 2px 8px #BBBBBB'} : {}}
+            itemID={index.toString()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+          >
+            <svg style={{height: '2.5em', width: '2.5em', margin: '0', borderRadius: '5px'}}>
+              <rect x={0} y={0} width={'100%'} height={'100%'} fill={COLORS.slice(index)[0]}/>
+            </svg>
+            <div className={'half-logo-name'}>
+              <p>{uni}</p>
+            </div>
+          </div>
+        );
+      })}
 
     </div>
   );
