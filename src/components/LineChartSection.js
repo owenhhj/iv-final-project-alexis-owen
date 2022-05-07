@@ -3,6 +3,7 @@ import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import {Linechart} from "./Linechart";
 
 const fakeUniNames = [{title: 'NYU'}, {title: 'NYUSH'}, {title: 'NYUAD'}];
 
@@ -37,6 +38,8 @@ export default function LineChartSection({
           )}
         />
       </div>
+
+      <Linechart/>
 
     </div>
   );
