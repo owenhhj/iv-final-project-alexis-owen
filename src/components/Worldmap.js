@@ -2,12 +2,19 @@ import React from "react";
 import {geoPath, geoEqualEarth, geoMercator} from "d3-geo";
 import {scaleLinear, min, max} from "d3";
 
-export function Worldmap(props) {
-  const {map, projection, data, location, selectedCity, setSelectedCity} = props;
-
-  // todo track browser window size && pass vh/vw from parent
-  // const trans = geoEqualEarth().fitSize([1200, 900], map);
-  const trans = geoEqualEarth();
+export function Worldmap({
+                           map,
+                           MAP_WIDTH,
+                           MAP_HEIGHT,
+                           PADDING,
+                           projection,
+                           data,
+                           location,
+                           selectedCity,
+                           setSelectedCity,
+                         }) {
+  const trans = geoEqualEarth().fitSize([MAP_WIDTH, MAP_HEIGHT], map);
+  // const trans = geoEqualEarth();
   let path = geoPath(geoEqualEarth()); // the default projection
 
   if (projection === "geoEqualEarth") {
@@ -32,7 +39,7 @@ export function Worldmap(props) {
   }
 
   return (
-    <g>
+    <g transform={`translate(${PADDING / 2}, ${PADDING / 2})`}>
       <path className={'sphere'} d={path({type: 'Sphere'})}/>
       {map.features.map(feature => {
           return <path key={feature.properties.name + "boundary"} className={"boundary"}

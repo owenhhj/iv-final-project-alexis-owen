@@ -44,11 +44,13 @@ export default function Geomap({
   setSelectedCity
                                }) {
 
-  const WIDTH = 1000;
-  const HEIGHT = 800;
-  const margin = {left: 50, right: 50, top: 50, bottom: 50, gap: 50};
+  const WIDTH_MAP = 950;
+  const HEIGHT_MAP = 550;
+  const PADDING_MAP = 20;
+  const HEIGHT_BAR = 280;
+  const PADDING_BAR = 40;
 
-  const [rankLimit, setRankLimit] = useState('0');
+  const [rankLimit, setRankLimit] = useState(2);
   const rawData = useLocation(csvUrl);
   const map = useMap(mapUrl);
   //==============data processing=====================
@@ -74,7 +76,8 @@ export default function Geomap({
   const changeHandler = (event) => {
     setRankLimit(event.target.value);
   }
-  const RANKLIMIT = [200, 150, 100, 50]
+  // const RANKLIMIT = [200, 150, 100, 50]
+  const RANKLIMIT = [50, 100, 150, 200];
   const yearData = rawYearData.filter(d => {
     return d.ranking <= RANKLIMIT[rankLimit];
   });
@@ -126,29 +129,40 @@ export default function Geomap({
   //console.log("This should be unique",uniqueGroupByCity);
   //==============data processing finished=====================
 
-
-  const mapWidth = 900
-  const mapHeight = 400
-
   return (
     <div className={'Geomap'}>
-      <div>
-        <input key="slider" type='range' min='0' max='3' value={rankLimit} step='1' onChange={changeHandler}/>
-        <input key="monthText" type="text" value={RANKLIMIT[rankLimit]} readOnly/>
+
+      <div className={'geomap-slider card'}>
+        <input
+          id={'inputSlider'} key="slider" type='range' min={0} max={3} value={rankLimit} step={1}
+          onChange={changeHandler}
+        />
+        <p>Top {RANKLIMIT[rankLimit]} universities in 2022</p>
       </div>
-      <svg width={WIDTH} height={HEIGHT}>
-        <g>
-          <Worldmap map={map} projection={"geoEqualEarth"}
-                    data={yearData} location={uniqueGroupByCity} selectedCity={selectedCity}
-                    setSelectedCity={setSelectedCity}/>
-          <Barchart offsetX={margin.left} offsetY={margin.top + mapHeight + margin.gap}
-                    height={150} width={mapWidth}
-                    data={yearData} location={uniqueGroupByCity}
-                    selectedCity={selectedCity}
-                    setSelectedCity={setSelectedCity}/>
-          <Linechart offsetX={margin.left} offsetY={margin.top} width={300} height={200} data={universityData}/>
-        </g>
-      </svg>
+
+      <div className={'geomap-svg-map card'}>
+          <svg width={WIDTH_MAP} height={HEIGHT_MAP}>
+              <Worldmap
+                map={map} projection={"geoEqualEarth"}
+                MAP_WIDTH={WIDTH_MAP - PADDING_MAP} MAP_HEIGHT={HEIGHT_MAP - PADDING_MAP} PADDING={PADDING_MAP}
+                data={yearData} location={uniqueGroupByCity} selectedCity={selectedCity}
+                setSelectedCity={setSelectedCity}
+              />
+          </svg>
+      </div>
+
+      <div className={'geomap-svg-map card'}>
+        <svg width={WIDTH_MAP} height={HEIGHT_BAR}>
+          <Barchart
+            offsetX={PADDING_BAR} offsetY={PADDING_BAR}
+            height={HEIGHT_BAR-PADDING_BAR*2} width={WIDTH_MAP-PADDING_BAR}
+            data={yearData} location={uniqueGroupByCity}
+            selectedCity={selectedCity}
+            setSelectedCity={setSelectedCity}
+          />
+        </svg>
+      </div>
+
     </div>
   );
 }

@@ -1,9 +1,7 @@
 
 .Tooltip {
-    /*width: 500px;*/
-    /*height: 600px;*/
-    width: 30vw;
-    height: 80vh;
+    width: 100%;
+    height: 350px;
 
     display: flex;
     flex-direction: column;
@@ -23,16 +21,18 @@
 
 .tooltip-row-title p {
     width: 90%;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: bold;
 }
 
 /**/
 
 .TooltipUniEntry {
-    width: 85%;
+    width: 90%;
     margin-top: 0.6em;
     background-color: #E0E0E0;
+
+    font-size: 0.9rem;
 
     display: flex;
     align-items: center;
