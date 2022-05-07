@@ -10,7 +10,7 @@
     position: absolute;
     top: 35vh;
     padding: 0.5em 1em;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .warning-msg p {
@@ -59,6 +59,7 @@ hr {
     height: 1px;
     background-color: #DADADA;
     border: none;
+    margin: 0.25rem 0;
 }
 
 .card {
