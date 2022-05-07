@@ -29,8 +29,8 @@ function App() {
       </div>
 
       <div className={'warning-msg card'}>
-        <p>A message from Alexis & Owen:</p>
-        <p>Your browser window is too narrow...</p>
+        <p style={{fontWeight: 'bold'}}>A message from Alexis & Owen:</p>
+        <p>Please enlarge your browser window or zoom out!</p>
       </div>
     </div>
   );
