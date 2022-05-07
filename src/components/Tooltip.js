@@ -3,7 +3,7 @@ import {csv} from 'd3';
 import {useEffect, useState} from "react";
 import {legalize_name} from "../CommonFunctions";
 
-export function useData(csvPath = './qs ranking 200 with location.csv', row = 3, year = 2022) {
+export function useData(csvPath = './qs ranking 200 with location.csv', year = 2022) {
   const [dataAll, setDataAll] = useState([]);
   useEffect(() => {
     let temp = [];
@@ -20,7 +20,9 @@ export function useData(csvPath = './qs ranking 200 with location.csv', row = 3,
 }
 
 export default function Tooltip({
-                                  selectedCity  // can be an object or null
+                                  selectedCity,  // can be an object or null
+                                  rankLimit,
+                                  RANKLIMIT
                                 }) {
   let data = useData();
 
@@ -35,7 +37,7 @@ export default function Tooltip({
           <hr/>
 
           {data
-            .filter(row => row.city === selectedCity.city && row.country === selectedCity.country)
+            .filter(row => row.city === selectedCity.city && row.country === selectedCity.country && row.ranking <= RANKLIMIT[rankLimit])
             .sort((row1, row2) => (row2.score - row1.score))
             .map((uni, index) => {
               return (
