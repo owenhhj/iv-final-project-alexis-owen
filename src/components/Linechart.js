@@ -4,7 +4,7 @@ import * as d3Line from 'd3'
 import {useLocation} from "../CommonFunctions";
 
 export function Linechart({
-                            selectedUniversities = ['NYU', 'NYU Shanghai'],
+                            selectedUniversities,
                             offsetX = 20,
                             offsetY = 20,
                             width = 300,
