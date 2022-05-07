@@ -1,6 +1,12 @@
 import {useEffect, useState} from "react";
 import {csv} from "d3";
 
+export const COLORS = [
+  '#7871AA',
+  '#190E4F',
+  '#00635D'
+];
+
 const illegalChars = ['/', ' ', '.', ':', '"', "'", '|'];
 
 export function legalize_name(name) {

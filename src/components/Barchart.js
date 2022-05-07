@@ -25,8 +25,8 @@ export function Barchart(props) {
 
   return (
     <g transform={`translate(${offsetX}, ${offsetY})`}>
-      <text style={{textAnchor: 'start', fontSize: '15px'}} transform={`translate(${width - 100}, 0)`}>
-        {"Score in 2022"}
+      <text style={{textAnchor: 'end', fontSize: '15px'}} transform={`translate(${width - 10}, 0)`}>
+        {"University Scores in 2022 - Assessed by QS World University Rankings®"}
       </text>
       {/* draw x axis */}
       <g>
@@ -56,7 +56,7 @@ export function Barchart(props) {
         {data.map(d => {
           return <rect key={d.university + "BS"} x={xScale(d.university)}
                        y={yScale(d.score)} width={xScale.bandwidth()} height={height - yScale(d.score)}
-                       fill={getColor(selectedCity, d)} stroke={"black"} opacity={0.9}
+                       fill={getColor(selectedCity, d)} stroke={"black"} opacity={0.7}
                        onMouseEnter={() => mouseOver(d)} onMouseOut={mouseOut}/>
         })}
       </g>
