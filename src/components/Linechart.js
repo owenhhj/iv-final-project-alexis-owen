@@ -24,26 +24,42 @@ function useLocation(csvPath) {
 
 export function Linechart({
                             selectedUniversities = ['NYU', 'NYU Shanghai'],
-                            offsetX = 20,
+                            offsetX = 50,
                             offsetY = 20,
                             width = 300,
                             height = 300
                           }) {
 
   // =============input box============
-  const selectedUniversity = "New York University (NYU)"
+  // const selectedUniversity = "New York University (NYU)"
+  const selectedUniversity = ["New York University (NYU)", "Yale University","Columbia University"]
   const csvUrl = "./qs ranking 200 with location.csv";
   const rawData = useLocation(csvUrl);
-  const data = rawData.filter(d => {
-    return d.university === selectedUniversity;
-  });
+  // const data = rawData.filter(d => {
+  //   return d.university === selectedUniversity;
+  // });
+  const array = []
+  for (let i=0; i<selectedUniversity.length; i++){
+    let data =  rawData.filter(d => {
+      return d.university === selectedUniversity[i];})
+    data.sort((a, b) => (a.year - b.year))
+    array.push(data)
+  };
+  console.log(array);
 
-  data.sort((a, b) => (a.year - b.year))
+  const dataAllUniversity = rawData.filter(d => {
+    return selectedUniversity.includes(d.university);})
+  console.log(dataAllUniversity);
+
+  // const data = rawData.filter(d => {
+  //   return d.university === "New York University (NYU)";
+  // });
+  // data.sort((a, b) => (a.year - b.year))
 
   const xScale = scaleBand().range([0, width])
-    .domain(data.map(d => d.year));
+    .domain(array[0].map(d => d.year));
   const yScale = scaleLinear().range([height, 0])
-    .domain([max(data, d => d.ranking), min(data, d => d.ranking)]).nice();
+    .domain([max(dataAllUniversity, d => d.ranking), min(dataAllUniversity, d => d.ranking)]).nice();
   const line = d3Line.line()
     .x(d => xScale(d.year))
     .y(d => yScale(d.ranking))
@@ -76,7 +92,15 @@ export function Linechart({
             </text>
           </g>
         })}
-        <path d={line(data)} stroke={"steelblue"} strokeWidth={3} fill={"none"}/>
+        {array.map(data => {
+          return <g key={data}>
+          <path d={line(data)} stroke={"steelblue"} strokeWidth={3} fill={"none"}/>
+          <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(data.slice(-1)[0].year)}, ${yScale(data.slice(-1)[0].ranking)})`}>
+              {data.slice(-1)[0].university}
+          </text>
+          </g>
+
+        })}
       </g>
     </svg>
   );
