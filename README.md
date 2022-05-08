@@ -4,6 +4,9 @@
 
 ### Datasets used:
 `https://www.kaggle.com/datasets/padhmam/qs-world-university-rankings-2017-2022`
+
+`https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json`
+
 `https://simplemaps.com/data/world-cities`
 
 ### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

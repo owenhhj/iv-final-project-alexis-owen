@@ -29,7 +29,7 @@ export default function LineChartSection() {
   return (
     <div className={'LineChartSection card'}>
       <div className={'tooltip-row-title'}>
-        <p>Rankings Over the Past Six Years</p>
+        <p>Rankings Over the Past Six Years (Top 200)</p>
       </div>
       <hr/>
       <div className={'LineChartSection-row-selector'}>
