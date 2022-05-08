@@ -1,8 +1,15 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {csv, json} from "d3";
 import * as topojson from "topojson-client";
 
 export const COLORS = [
+  '#11162A',
+  '#4960E0',
+  '#77CDDE',
+  '#01398C',
+  '#1565C1',
+  '#50B2C0',
+  '#6191F4',
   '#7871AA',
   '#190E4F',
   '#00635D'
