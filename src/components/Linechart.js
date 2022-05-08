@@ -1,5 +1,5 @@
 import React from "react";
-import {scaleLinear, scaleBand, max, min, curveBasis, csv} from "d3";
+import {scaleLinear, scaleBand, max, min, curveBasis, curveNatural, csv} from "d3";
 import * as d3Line from 'd3'
 import {COLORS, useLocation} from "../CommonFunctions";
 
@@ -33,12 +33,11 @@ export function Linechart({
 
   const xScale = scaleBand().range([0, width])
     .domain([2017, 2018, 2019, 2020, 2021, 2022]);
-  const yScale = scaleLinear().range([height, 0])
+  const yScale = scaleLinear().range([height, 20])
     .domain([max(dataAllUniversity, d => d.ranking), min(dataAllUniversity, d => d.ranking)]).nice();
   const line = d3Line.line()
     .x(d => xScale(d.year))
-    .y(d => yScale(d.ranking))
-    .curve(curveBasis);
+    .y(d => yScale(d.ranking));
 
   const xTicks = xScale.domain();
   const yTicks = yScale.ticks(5);
@@ -80,7 +79,7 @@ export function Linechart({
             <g key={index}>
               <path
                 name={index.toString()} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
-                strokeWidth={index.toString() === hoveredIndex ? 5 : 3}
+                strokeWidth={index.toString() === hoveredIndex ? 6 : 3}
                 d={line(data)} stroke={COLORS.slice(index)[0]} fill={"none"}
               />
             </g>
